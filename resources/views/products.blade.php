@@ -12,6 +12,12 @@
             <aside class="lg:col-span-1 p-4 text-sm">
                 <h2 class="block text-lg/6 font-medium text-gray-900 dark:text-gray-50 mb-4">Filter Produk</h2>
                 <form method="GET" action="{{ route('products.index') }}">
+                    {{-- Filter Name --}}
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-2 text-gray-900 dark:text-gray-50">Search</label>
+                        <input type="text" name="search" value="{{ request('search') }}" class="w-full border rounded px-3 py-2 dark:text-gray-50" placeholder="Search by name">
+                    </div>
+
                     {{-- Filter Kategori --}}
                     <div class="mb-4">
                         <label class="block text-sm font-medium mb-2 text-gray-900 dark:text-gray-50">Brands</label>

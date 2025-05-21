@@ -7,7 +7,7 @@
 
 @section('content')
 @php
-    $image    = $product->images->isNotEmpty()  ? asset('storage/upload/products/' . $product->images[0]->url) : asset('assets/images/no-images.jpeg');
+    $image    = $product->images->isNotEmpty()  ? asset('storage/upload/products/' . optional($product->images->firstWhere('is_primary', 1))->url) : asset('assets/images/no-images.jpeg');
 @endphp
 
 <section class="py-12">

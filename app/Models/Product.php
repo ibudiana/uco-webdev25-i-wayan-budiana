@@ -57,6 +57,11 @@ class Product extends Model
 
     public function scopeFilter($query, $filters)
     {
+        dd($filters);
+
+        if ($filters['search'] ?? false) {
+            $query->search($filters['search']);
+        }
         if ($filters['category'] ?? false) {
             $query->where('category_id', $filters['category']);
         }

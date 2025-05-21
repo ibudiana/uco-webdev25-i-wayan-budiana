@@ -20,11 +20,13 @@ class ProductController extends Controller
             $file->storeAs('upload/products', $filename, 'public');
 
             // Simpan nama file di product
-            $product->images()->create([
+            $image = $product->images()->create([
                 'url' => $filename,
                 'is_primary' => true,
             ]);
 
+            // Set the image as primary
+            $image->makePrimary();
 
             // Debug
             info('Image uploaded: ' . $filename);
@@ -39,6 +41,11 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = Product::query();
+
+        // Filter by search
+        if ($request->has('search') && $request->search != '') {
+            $products->search($request->search);
+        }
 
         // Filter by category
         if ($request->has('category') && $request->category != '') {

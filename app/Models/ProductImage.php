@@ -30,4 +30,16 @@ class ProductImage extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function makePrimary()
+    {
+        // Nonaktifkan semua image lain
+        self::where('product_id', $this->product_id)
+            ->where('id', '!=', $this->id)
+            ->update(['is_primary' => false]);
+
+        // Set this image as primary
+        $this->is_primary = true;
+        $this->save();
+    }
 }

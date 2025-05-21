@@ -6,6 +6,22 @@
     </div>
 </footer>
 <script>
+    function imagePreview() {
+        return {
+            imageUrl: null,
+            fileChosen(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = e => {
+                    this.imageUrl = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    }
+
     function setCookie(name, value, days) {
         const expires = new Date(Date.now() + days * 864e5).toUTCString()
         document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=/'

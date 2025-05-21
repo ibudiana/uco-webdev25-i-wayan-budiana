@@ -1,7 +1,7 @@
 @props(['product'])
 
 @php
-  $image    = $product->images->isNotEmpty()  ? asset('storage/upload/products/' . $product->images[0]->url) : asset('assets/images/no-images.jpeg');
+  $image    = $product->images->isNotEmpty()  ? asset('storage/upload/products/' . optional($product->images->firstWhere('is_primary', 1))->url) : asset('assets/images/no-images.jpeg');
   $url      = route('products.show', $product->slug);
   $price    = 'Rp. ' . ($product->formatted_price ?? number_format($product->price, 2));
   $title    = $product->name;
