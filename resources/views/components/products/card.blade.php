@@ -35,9 +35,9 @@
         </div>
     </div>
 
-    {{-- Tombol Read More --}}
-    <button
-    @click="$store.cart.addItem({ id: {{ $product->id }}, name: '{{ $product->name }}', price: {{ $product->price}}, qty: 1 })" class="absolute bottom-4 right-4 text-amber-600 hover:text-amber-800 transition-colors">
+    {{-- Tombol add to cart --}}
+    <button class="absolute bottom-4 right-4 text-amber-600 hover:text-amber-800 transition-colors cursor-pointer"
+    @click="$store.cart.addItem({ id: {{ $product->id }}, name: '{{ $product->name }}', price: {{ $product->price}}, qty: 1 })" >
         <i class="fa-solid fa-shopping-cart text-lg"></i>
     </button>
 </div>

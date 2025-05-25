@@ -74,7 +74,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $brands = Brand::all();
 
-        return view('products', compact('products', 'categories', 'brands'));
+        return view('products.index', compact('products', 'categories', 'brands'));
         // Return the products as a JSON response
         // return response()->json(['products' => $products]);
     }

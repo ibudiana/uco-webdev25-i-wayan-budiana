@@ -64,7 +64,7 @@
 
             {{-- Product Grid --}}
             <div class="lg:col-span-5">
-                <div x-data="{ loading: true }" x-init="setTimeout(() => loading = false, 1500)">
+                <div x-data="{ loading: true }" x-init="setTimeout(() => loading = false, 500)">
                     <template x-if="loading">
                         <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6">
                             <template x-for="i in 10" :key="i">

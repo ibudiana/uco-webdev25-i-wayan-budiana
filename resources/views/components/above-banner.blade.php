@@ -19,9 +19,9 @@
     <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
         <p class="text-sm/6 text-gray-900 dark:text-gray-50">
             <strong class="font-semibold">New Year Promo</strong>
-            <svg viewBox="0 0 2 2" class="mx-2 inline size-0.5 fill-current" aria-hidden="true">
+            {{-- <svg viewBox="0 0 2 2" class="mx-2 inline size-0.5 fill-current" aria-hidden="true">
                 <circle cx="1" cy="1" r="1" />
-            </svg>
+            </svg> --}}
             Clearance Sale - Diskon s/d 70%.
         </p>
         <a href="#" class="flex-none rounded-full bg-gray-900 dark:bg-gray-50 px-3.5 py-1 text-sm font-semibold text-gray-50 dark:text-gray-900 shadow-xs hover:bg-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900">
