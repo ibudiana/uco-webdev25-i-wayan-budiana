@@ -74,7 +74,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $brands = Brand::all();
 
-        if (Auth::check() && Auth::user()->hasVerifiedEmail()) {
+        if (Auth::check() && Auth::user()->hasVerifiedEmail() && Auth::user()->hasRole('admin')) {
             // Admin View
             return view('admin.products.index', compact('products', 'categories', 'brands'));
         } else {
