@@ -1,0 +1,90 @@
+@extends('layouts.admin')
+
+<x-alerts.success />
+
+@section('content')
+    <div class="py-12">
+        <div class="container mx-auto">
+            <div class=" overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <div class="flex text-gray-900 dark:text-gray-50 justify-between items-center mb-6">
+                        <h2 class="text-xl font-semibold">Products</h2>
+                        <a href="{{ route('products.create') }}" class="inline-flex items-center px-4 py-2 bg-amber-500 text-white rounded hover:bg-amber-600">
+                            <i class="fa-solid fa-plus mr-2"></i> Add New Product
+                        </a>
+                    </div>
+                    <div class="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
+                        <div class="max-w-full overflow-x-auto">
+                            <table class="min-w-full">
+                            <!-- table header start -->
+                                <thead>
+                                    <tr class="border-b border-gray-100 dark:border-gray-800">
+                                    <th class="px-5 py-3 sm:px-6">
+                                        <div class="flex items-center">
+                                        <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                            Product Name
+                                        </p>
+                                        </div>
+                                    </th>
+                                    <th class="px-5 py-3 sm:px-6">
+                                        <div class="flex items-center">
+                                        <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                            Brand
+                                        </p>
+                                        </div>
+                                    </th>
+                                    <th class="px-5 py-3 sm:px-6">
+                                        <div class="flex items-center">
+                                        <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                            Category
+                                        </p>
+                                        </div>
+                                    </th>
+                                    <th class="px-5 py-3 sm:px-6">
+                                        <div class="flex items-center">
+                                        <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                            Price
+                                        </p>
+                                        </div>
+                                    </th>
+                                    <th class="px-5 py-3 sm:px-6">
+                                        <div class="flex items-center">
+                                        <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                            Action
+                                        </p>
+                                        </div>
+                                    </th>
+                                    </tr>
+                                </thead>
+                                <!-- table header end -->
+
+                                <!-- table body start -->
+                                    @forelse ($products as $product)
+                                        <x-products.table :product="$product" />
+                                    @empty
+                                    <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+                                        <tr>
+                                            <td colspan="5" class="px-5 py-4 sm:px-6 text-center">
+                                                <i class="fa-solid fa-box-open text-4xl mb-4 text-amber-500"></i>
+                                                <h3 class="text-lg font-semibold mb-2">No products found</h3>
+                                                <p class="text-gray-600 dark:text-gray-50">
+                                                    Sorry, we couldn't find any products that match your search. Try using different keywords or browse other categories.
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    @endforelse
+                            </table>
+                        </div>
+                    </div>
+                    {{-- End of Product Table --}}
+
+                    {{-- Pagination Links --}}
+                    <div class="mt-8">
+                        {{ $products->links() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

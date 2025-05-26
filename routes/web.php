@@ -1,19 +1,37 @@
 <?php
 
-use App\Http\Controllers\BrandController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+// Routes that require authentication auth only
+Route::middleware(['auth'])->group(function () {
+    // Profile
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [ProfileController::class, 'edit'])->name('edit');
+        Route::patch('/', [ProfileController::class, 'update'])->name('update');
+        Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
+    });
+});
+
+// Routes that require authentication and email verification
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::resource('products', ProductController::class);
 });
 
 // Public routes
 Route::group([], function () {
+    // Home page
+    Route::get('/', function () {
+        return view('welcome');
+    })->name('home');
+
+    // Products index and show
     Route::resource('products', ProductController::class)->only(['index', 'show']);
 });
 
-// Routes that require authentication
-Route::middleware(['auth'])->group(function () {
-    Route::resource('products', ProductController::class)->except(['index', 'show']);
-});
+require __DIR__ . '/auth.php';

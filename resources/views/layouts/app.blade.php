@@ -6,7 +6,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-    <script src="//unpkg.com/alpinejs" defer></script>
+    {{-- <script src="//unpkg.com/alpinejs" defer></script> --}}
     <style>
         [x-cloak] {
           display: none !important;
@@ -16,6 +16,10 @@
     <title>@yield('title', 'ibudiana shop')</title>
 </head>
 <body class="bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-50">
+
+    <x-banner.above-header />
+
+    <!-- Navbar Section  -->
     @php
         $menus = [
             ['label' => 'Home', 'url' => '/'],
@@ -23,8 +27,7 @@
         ];
     @endphp
 
-    <!-- Navbar Section  -->
-    <x-navbar :menus="$menus" />
+    <x-navbar.app :menus="$menus" />
 
     <!-- Page Content -->
     <main class="container mx-auto">

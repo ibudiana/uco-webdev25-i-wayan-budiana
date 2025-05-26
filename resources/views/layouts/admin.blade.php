@@ -6,14 +6,14 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-    <script src="//unpkg.com/alpinejs" defer></script>
+    {{-- <script src="//unpkg.com/alpinejs" defer></script> --}}
     <style>
         [x-cloak] {
           display: none !important;
         }
     </style>
 
-    <title>@yield('title', 'ibudiana shop')</title>
+    <x-meta title="Admin Dasboard" description="Admin dashboard description"/>
 </head>
 <body class="bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-50">
     <!-- Navbar Section  -->
@@ -23,11 +23,12 @@
             ['label' => 'Products', 'url' => '/products']
         ];
     @endphp
-    <x-admin.navbar :menus="$menus" />
+    <x-navbar.admin :menus="$menus" />
 
     <!-- Page Content -->
     <main class="container mx-auto">
         @yield('content')
+        {{-- @if (isset($slot)) {{ $slot }} @endif --}}
     </main>
 
     <!-- Footer Section -->

@@ -15,13 +15,13 @@
                     {{-- Filter Name --}}
                     <div class="mb-4">
                         <label class="block text-sm font-medium mb-2 text-gray-900 dark:text-gray-50">Search</label>
-                        <input type="text" name="search" value="{{ request('search') }}" class="w-full border rounded px-3 py-2 dark:text-gray-50" placeholder="Search by name">
+                        <input type="text" name="search" value="{{ request('search') }}" class="w-full border rounded px-3 py-2 dark:text-gray-900" placeholder="Search by name">
                     </div>
 
                     {{-- Filter Kategori --}}
                     <div class="mb-4">
                         <label class="block text-sm font-medium mb-2 text-gray-900 dark:text-gray-50">Brands</label>
-                        <select name="brand" class="w-full border rounded px-3 py-2 dark:text-gray-50">
+                        <select name="brand" class="w-full border rounded px-3 py-2 dark:text-gray-900">
                             <option value="">All Brand</option>
                             @foreach ($brands as $brand)
                                 <option value="{{ $brand->id }}" {{ request('brand') == $brand->id ? 'selected' : '' }}>
@@ -34,7 +34,7 @@
                     {{-- Filter Brand --}}
                     <div class="mb-4">
                         <label class="block text-sm font-medium mb-2 text-gray-900 dark:text-gray-50">Categories</label>
-                        <select name="category" class="w-full border rounded px-3 py-2 dark:text-gray-50">
+                        <select name="category" class="w-full border rounded px-3 py-2 dark:text-gray-900">
                             <option value="">All Category</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
@@ -46,20 +46,20 @@
                     {{-- Filter Harga --}}
                     <div class="mb-4">
                         <label class="block text-sm font-medium mb-2 text-gray-900 dark:text-gray-50">Min Price</label>
-                        <input type="number" name="min_price" value="{{ request('min_price') }}" class="w-full border rounded px-3 py-2 dark:text-gray-50" placeholder="Input minimal price">
+                        <input type="number" name="min_price" value="{{ request('min_price') }}" class="w-full border rounded px-3 py-2 dark:text-gray-900" placeholder="Input minimal price">
                     </div>
                     <div class="mb-4">
                         <label class="block text-sm font-medium mb-2 text-gray-900 dark:text-gray-50">Max Price</label>
-                        <input type="number" name="max_price" value="{{ request('max_price') }}" class="w-full border rounded px-3 py-2 dark:text-gray-50" placeholder="input maximum price">
+                        <input type="number" name="max_price" value="{{ request('max_price') }}" class="w-full border rounded px-3 py-2 dark:text-gray-900" placeholder="input maximum price">
                     </div>
                     {{-- Tombol Filter --}}
                     <button type="submit" class="w-full bg-amber-500 text-white py-2 rounded hover:bg-amber-600">Search</button>
                 </form>
 
                 {{-- Tombol Add New Product --}}
-                <a href="{{ route('products.create') }}" >
+                {{-- <a href="{{ route('products.create') }}" >
                     <button class="mt-7 w-full bg-amber-500 text-white py-2 rounded hover:bg-amber-600">Add New Product</button>
-                </a>
+                </a> --}}
             </aside>
 
             {{-- Product Grid --}}

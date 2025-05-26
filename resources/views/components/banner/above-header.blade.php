@@ -1,5 +1,5 @@
 <div x-data="{ showBanner: true }" x-show="showBanner" x-transition
-     class="relative isolate flex items-center gap-x-6 overflow-hidden bg-gray-50 dark:bg-gray-900 px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
+     class="relative isolate flex items-center gap-x-6 overflow-hidden bg-gray-900 px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
 
     <!-- Background Gradient Left -->
     <div class="absolute top-1/2 left-[max(-7rem,calc(50%-52rem))] -z-10 -translate-y-1/2 transform-gpu blur-2xl" aria-hidden="true">
@@ -17,14 +17,14 @@
 
     <!-- Promo Text & Button -->
     <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-        <p class="text-sm/6 text-gray-900 dark:text-gray-50">
+        <p class="text-sm/6 text-gray-50 dark:text-gray-50">
             <strong class="font-semibold">New Year Promo</strong>
             {{-- <svg viewBox="0 0 2 2" class="mx-2 inline size-0.5 fill-current" aria-hidden="true">
                 <circle cx="1" cy="1" r="1" />
             </svg> --}}
             Clearance Sale - Diskon s/d 70%.
         </p>
-        <a href="#" class="flex-none rounded-full bg-gray-900 dark:bg-gray-50 px-3.5 py-1 text-sm font-semibold text-gray-50 dark:text-gray-900 shadow-xs hover:bg-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900">
+        <a href="{{ route('register') }}" class="flex-none rounded-full bg-gray-900 dark:bg-gray-50 px-3.5 py-1 text-sm font-semibold text-gray-50 dark:text-gray-900 shadow-xs hover:bg-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900">
             Register now <span aria-hidden="true">&rarr;</span>
         </a>
     </div>

@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="pb-12 pt-12">
-    <div class="container mx-auto">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <x-products.form
                 :product="$product"
                 :categories="$categories"
@@ -13,5 +13,4 @@
             />
     </div>
 </section>
-
 @endsection
