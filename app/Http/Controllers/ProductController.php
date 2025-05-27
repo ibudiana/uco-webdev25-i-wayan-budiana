@@ -22,7 +22,7 @@ class ProductController extends Controller
             // Simpan nama file di product
             $image = $product->images()->create([
                 'url' => $filename,
-                'is_primary' => true,
+                'is_primary' => false,
             ]);
 
             // Set the image as primary

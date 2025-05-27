@@ -1,4 +1,4 @@
-<footer class="fixed bottom-0 left-0 w-full bg-white dark:bg-gray-900 shadow">
+<footer class="mt-10  bottom-0 left-0 w-full bg-white dark:bg-gray-900 shadow">
     <div class="container mx-auto py-7">
         <p class="text-center font-medium text-gray-900 dark:text-gray-50">
             © 2025 ibudiana. All Rights Reserved.

@@ -55,5 +55,12 @@
     </div>
   </div>
 </div>
+
+<div class="mt-10 mx-auto max-w-7xl grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+    @forelse ($products as $product)
+        <x-products.card :product="$product" />
+    @empty
+    @endforelse
+</div>
 @endsection
 {{-- End Home Content --}}
