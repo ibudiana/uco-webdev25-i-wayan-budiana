@@ -91,6 +91,12 @@
                 </option>
             @endforeach
         </select>
+
+        <!-- Tombol tambah kategori -->
+        <button type="button" onclick="openAddCategoryModal()" class="mt-2 text-sm text-amber-600 hover:underline">
+            + Tambah Kategori Baru
+        </button>
+
     </div>
 
     <div>
@@ -181,3 +187,5 @@
         </button>
     </div>
 </form>
+
+<x-modal.add-category/>

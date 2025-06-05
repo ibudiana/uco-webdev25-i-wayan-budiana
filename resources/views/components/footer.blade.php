@@ -63,4 +63,12 @@
             }
         });
     });
+
+    function openAddCategoryModal() {
+        document.getElementById('addCategoryModal').classList.remove('hidden');
+        }
+
+    function closeAddCategoryModal() {
+        document.getElementById('addCategoryModal').classList.add('hidden');
+    }
 </script>
