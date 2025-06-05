@@ -17,10 +17,10 @@ class ProductVariantFactory extends Factory
     public function definition(): array
     {
         return [
-            'product_id' => $this->faker->numberBetween(1, 20), // asumsi kamu sudah punya 20 produk
+            'product_id' => $this->faker->numberBetween(1, 30),
             'sku' => 'SKU-' . $this->faker->unique()->numberBetween(1000, 9999),
             'price' => $this->faker->numberBetween(75000, 500000),
-            'stock' => $this->faker->numberBetween(0, 100),
+            'stock' => $this->faker->numberBetween(1, 100),
         ];
     }
 }

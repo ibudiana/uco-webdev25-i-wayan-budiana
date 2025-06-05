@@ -17,12 +17,12 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->words(3, true); // contoh: "Casual Denim Jacket"
+        $name = $this->faker->words(3, true);
         return [
             'name' => ucfirst($name),
             'slug' => Str::slug($name),
             'description' => $this->faker->sentence(12),
-            'price' => $this->faker->numberBetween(75000, 500000), // 75k - 500k
+            'price' => $this->faker->numberBetween(75000, 500000),
             'stock' => $this->faker->numberBetween(0, 100),
             'category_id' => $this->faker->numberBetween(1, 5),
             'brand_id' => $this->faker->numberBetween(1, 5),

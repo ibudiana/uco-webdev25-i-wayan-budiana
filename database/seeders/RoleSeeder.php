@@ -20,8 +20,8 @@ class RoleSeeder extends Seeder
 
         // Buat atau ambil user admin (misalnya berdasarkan email)
         $admin = User::firstOrCreate(
-            ['email' => 'yan.budiana@gmail.com'],
-            ['name' => 'Super Admin', 'password' => bcrypt('password')]
+            ['email' => 'ibudiana@student.ciputra.ac.id'],
+            ['name' => 'Admin', 'password' => bcrypt('password')]
         );
 
         // Assign role admin ke user tersebut
@@ -29,8 +29,8 @@ class RoleSeeder extends Seeder
 
         // Optional: buat user biasa
         $user = User::firstOrCreate(
-            ['email' => 'user@example.com'],
-            ['name' => 'Regular User', 'password' => bcrypt('password')]
+            ['email' => 'yan.budiana@gmail.com'],
+            ['name' => 'User', 'password' => bcrypt('password')]
         );
 
         // Assign role user
