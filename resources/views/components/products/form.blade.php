@@ -16,25 +16,31 @@
 
     <div x-data="{ mainImage: '{{ $image }}' }" class="max-w-lg mx-auto">
 
-    <!-- Gambar utama -->
-    <div class="mb-4">
-        <img :src="mainImage" alt="Product Image" class="w-full h-96 object-cover rounded shadow-md transition-transform duration-300 hover:scale-105" />
-    </div>
+        <!-- Gambar utama -->
+        <div class="mb-4">
+            <img :src="mainImage" alt="Product Image" class="w-full h-96 object-cover rounded shadow-md transition-transform duration-300 hover:scale-105" />
+        </div>
 
-    <!-- Thumbnail gallery -->
-    <div class="flex space-x-2 overflow-x-auto">
-        @foreach (optional($product)->images ?? [] as $image)
-            <button
-                type="button"
-                @click="mainImage = '{{ asset('storage/upload/products/' . $image->url) }}'"
-                class="border rounded overflow-hidden focus:outline-none focus:ring-2 focus:ring-amber-500"
-            >
-                <img src="{{ asset('storage/upload/products/' . $image->url) }}" alt="Thumbnail" class="w-20 h-20 object-cover hover:brightness-90" />
-            </button>
-        @endforeach
-    </div>
 
-</div>
+        <!-- Thumbnail gallery -->
+        <div class="flex space-x-2 overflow-x-auto">
+            @foreach (optional($product)->images as $thumb)
+                <div class="relative">
+                    <button
+                        type="button"
+                        @click="mainImage = '{{ asset('storage/upload/products/' . $thumb->url) }}'"
+                        class="border rounded overflow-hidden focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    >
+                        <img src="{{ asset('storage/upload/products/' . $thumb->url) }}" alt="Thumbnail" class="w-20 h-20 object-cover hover:brightness-90" />
+                    </button>
+
+                    <button type="button" onclick="submitDeleteForm({{ $thumb->id }})" class="text-red-600 text-xs hover:underline absolute top-1 right-1">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            @endforeach
+        </div>
+    </div>
 
     <div class="col-span-full">
         <label for="product-image" class="block text-sm/6 font-medium text-gray-900 dark:text-gray-50">Product Image</label>
@@ -189,3 +195,18 @@
 </form>
 
 <x-modal.add-category/>
+
+@foreach (optional($product)->images as $thumb)
+    <form id="delete-form-{{ $thumb->id }}" action="{{ route('product.image.delete', $thumb->id) }}" method="POST" class="hidden">
+        @csrf
+        @method('DELETE')
+    </form>
+@endforeach
+
+<script>
+    function submitDeleteForm(id) {
+        if (confirm('Delete this image?')) {
+            document.getElementById(`delete-form-${id}`).submit();
+        }
+    }
+</script>

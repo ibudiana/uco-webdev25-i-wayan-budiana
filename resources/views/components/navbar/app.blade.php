@@ -60,6 +60,10 @@
                                     {{ __('Profile') }}
                                 </x-dropdown-link>
 
+                                <x-dropdown-link :href="route('transaction.index')">
+                                    {{ __('Orders') }}
+                                </x-dropdown-link>
+
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf

@@ -35,7 +35,7 @@
                         <p class="text-sm text-gray-900 dark:text-gray-50">Qty: <span x-text="item.qty"></span></p>
                     </div>
                     <div class="text-right">
-                        <p class="font-semibold" x-text="'Rp ' + (item.price).toLocaleString('id-ID')"></p>
+                        <p class="font-semibold" x-text="'Rp ' + Number(item.price).toLocaleString('id-ID')"></p>
                         <button @click="$store.cart.removeItem(index)" class="text-xs text-red-600 hover:underline">Remove</button>
                     </div>
                 </div>
@@ -53,9 +53,11 @@
             <p class="font-semibold mb-2 text-right text-gray-900 dark:text-white">
                 Total: <span x-text="'Rp ' + $store.cart.totalPrice().toLocaleString('id-ID')"></span>
             </p>
-            <button class="w-full rounded-md bg-amber-600 text-gray-900 font-semibold py-2 hover:bg-amber-500">
-                Checkout
-            </button>
+            <a href="{{ route('transaction.checkout') }}">
+                <button class="w-full rounded-md bg-amber-600 text-gray-900 font-semibold py-2 hover:bg-amber-500">
+                    Checkout
+                </button>
+            </a>
         </div>
     </div>
 </div>

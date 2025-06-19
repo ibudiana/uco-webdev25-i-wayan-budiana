@@ -1,7 +1,9 @@
 @extends('layouts.admin')
 
 {{-- Meta Section --}}
-@section('title', 'Home')
+@section('meta')
+        <x-meta title="Edit Profile" description="Edit your profile information"/>
+@endsection
 
 {{-- Home Content --}}
 @section('content')
@@ -11,6 +13,18 @@
                 <div class="p-4 sm:p-8 bg-gray-50 dark:bg-gray-900 shadow sm:rounded-lg">
                     <div class="max-w-xl">
                         @include('profile.partials.update-profile-information-form')
+                    </div>
+                </div>
+
+                <div class="p-4 sm:p-8 bg-gray-50 dark:bg-gray-900 shadow sm:rounded-lg">
+                    <div class="max-w-xl">
+                        @include('profile.partials.payment-methode-form')
+                    </div>
+                </div>
+
+                <div class="p-4 sm:p-8 bg-gray-50 dark:bg-gray-900 shadow sm:rounded-lg">
+                    <div class="max-w-xl">
+                        @include('profile.partials.shipping-addresse')
                     </div>
                 </div>
 

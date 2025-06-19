@@ -6,7 +6,9 @@ use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -34,6 +36,35 @@ class ProductController extends Controller
             info('No image file uploaded');
         }
     }
+
+
+    public function deleteImage($id)
+    {
+        $image = ProductImage::findOrFail($id);
+        $product = $image->product;
+
+        // Cek jika ini adalah satu-satunya gambar
+        if ($product->images()->count() === 1) {
+            return back()->with('error', 'Tidak bisa menghapus gambar terakhir.');
+        }
+
+        // Hapus file dari storage
+        $imagePath = 'upload/products/' . $image->url;
+        if (Storage::disk('public')->exists($imagePath)) {
+            Storage::disk('public')->delete($imagePath);
+        }
+
+        // Jika yang dihapus adalah gambar utama, set yang lain jadi primary
+        if ($image->is_primary) {
+            $product->images()->where('id', '!=', $image->id)->first()?->makePrimary();
+        }
+
+        // Hapus data image dari database
+        $image->delete();
+
+        return back()->with('success', 'Gambar berhasil dihapus.');
+    }
+
 
     /**
      * Display a listing of the resource.
@@ -68,7 +99,7 @@ class ProductController extends Controller
         }
 
         // Fetch all products with their related images, variants, attributes, categories, and brand
-        $products = $products->with(['brand', 'category', 'images', 'variants.attributeValues.attribute'])->paginate(10);
+        $products = $products->with(['brand', 'category', 'images', 'variants.attributeValues.attribute'])->paginate(10)->withQueryString();
 
         // Get Categories and Brands
         $categories = Category::all();

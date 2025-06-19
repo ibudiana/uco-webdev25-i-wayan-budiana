@@ -4,6 +4,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 // Routes that require authentication auth only
@@ -13,6 +15,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [ProfileController::class, 'edit'])->name('edit');
         Route::patch('/', [ProfileController::class, 'update'])->name('update');
         Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
+
+        Route::get('/payment-methods', [ProfileController::class, 'paymentMethods'])->name('payment-methods');
+        Route::patch('/payment-methods', [ProfileController::class, 'storePaymentMethod'])->name('payment-methods.store');
+        Route::delete('/payment-methods/{id}', [ProfileController::class, 'deletePaymentMethod'])->name('payment-methods.delete');
+
+        Route::get('/shipping-addresses', [ProfileController::class, 'shippingAddresses'])->name('shipping-addresses');
+        Route::patch('/shipping-addresses', [ProfileController::class, 'storeShippingAddress'])->name('shipping-addresses.store');
+        Route::delete('/shipping-addresses/{id}', [ProfileController::class, 'deleteShippingAddress'])->name('shipping-addresses.delete');
     });
 });
 
@@ -23,18 +33,28 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::resource('products', ProductController::class);
+    Route::delete('/products/image/{id}', [ProductController::class, 'deleteImage'])->name('product.image.delete');
+
 
     Route::post('categories', [CategoryController::class, 'store'])->name('categories.store');
+
+    Route::prefix('transaction')->name('transaction.')->group(function () {
+        Route::get('/checkout', [TransactionController::class, 'showCheckoutForm'])->name('checkout');
+        Route::post('/checkout', [TransactionController::class, 'processCheckout'])->name('process');
+        Route::get('/complete', [TransactionController::class, 'checkoutSuccess'])->name('complete');
+
+        Route::get('/', [TransactionController::class, 'index'])->name('index');
+        Route::get('/{id}', [TransactionController::class, 'show'])->name('show');
+        Route::patch('/{id}/status', [TransactionController::class, 'updateStatus'])->name('updateStatus');
+    });
+
+    Route::post('/cart/store', [CartController::class, 'store'])->name('cart.store');
+    Route::get('/cart/fetch', [CartController::class, 'fetch'])->name('cart.fetch');
 });
 
 
 // Public routes
 Route::group([], function () {
-    // Home page
-    // Route::get('/', function () {
-    //     return view('welcome');
-    // })->name('home');
-
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     // Products index and show
