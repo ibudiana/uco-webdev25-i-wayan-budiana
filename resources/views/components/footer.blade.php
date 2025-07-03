@@ -72,11 +72,13 @@
             loading: true,
 
             async init() {
+
                 if (window.isLoggedIn) {
                     await this.fetchFromServer();
                 } else {
                     this.cart = JSON.parse(localStorage.getItem('cart') || '[]');
                 }
+
                 this.loading = false;
             },
 
@@ -98,20 +100,24 @@
                     this.cart.push({ ...item, qty: item.qty ?? 1 });
                 }
 
-                if (window.isLoggedIn) {
-                    this.saveToServer();
-                } else {
-                    this.save();
+                window.isLoggedIn ? this.saveToServer() : this.save();
+            },
+
+            increaseQty(index) {
+                this.cart[index].qty++;
+                window.isLoggedIn ? this.saveToServer() : this.save();
+            },
+
+            decreaseQty(index) {
+                if (this.cart[index].qty > 1) {
+                    this.cart[index].qty--;
+                    window.isLoggedIn ? this.saveToServer() : this.save();
                 }
             },
 
             removeItem(index) {
                 this.cart.splice(index, 1);
-                if (window.isLoggedIn) {
-                    this.saveToServer();
-                } else {
-                    this.save();
-                }
+                window.isLoggedIn ? this.saveToServer() : this.save();
             },
 
             totalPrice() {

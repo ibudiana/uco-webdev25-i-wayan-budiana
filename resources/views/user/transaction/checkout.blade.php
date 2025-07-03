@@ -22,8 +22,11 @@
                                 <div class="flex items-center justify-between border-b pb-2">
                                     <div>
                                         <p class="font-medium" x-text="item.name"></p>
-                                        <p class="text-sm text-gray-900 dark:text-gray-50">
-                                            Qty: <span x-text="item.qty"></span>
+                                        <p class="text-sm text-gray-900 dark:text-gray-50 flex items-center gap-2">
+                                            Qty:
+                                            <button type="button" @click="$store.cart.decreaseQty(index)" class="w-5 h-5 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-50 rounded-full">-</button>
+                                            <span x-text="item.qty"></span>
+                                            <button type="button" @click="$store.cart.increaseQty(index)" class="w-5 h-5 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-50 rounded-full">+</button>
                                         </p>
                                     </div>
                                     <div class="text-right">

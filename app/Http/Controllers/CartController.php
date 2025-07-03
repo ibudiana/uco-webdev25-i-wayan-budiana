@@ -22,10 +22,11 @@ class CartController extends Controller
         $cart = Cart::firstOrCreate(
             ['user_id' => $user->id, 'is_active' => true]
         );
-        // Hapus item lama
+
+        // Hapus item lama yang ada di cart
         $cart->items()->delete();
 
-        // Simpan item baru
+        // Simpan item baru di table cart_items
         foreach ($cartData as $item) {
             $cart->items()->create([
                 'product_id' => $item['id'],
