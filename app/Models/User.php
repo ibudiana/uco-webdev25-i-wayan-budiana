@@ -68,4 +68,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(Cart::class)->where('is_active', true)->with('items');
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(ProductReview::class);
+    }
 }

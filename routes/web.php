@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductReviewController;
 use Illuminate\Support\Facades\Route;
 
 // Routes that require authentication auth only
@@ -34,6 +35,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('products', ProductController::class);
     Route::delete('/products/image/{id}', [ProductController::class, 'deleteImage'])->name('product.image.delete');
+    Route::post('/products/review', [ProductReviewController::class, 'store'])->name('product.review');
 
 
     Route::post('categories', [CategoryController::class, 'store'])->name('categories.store');

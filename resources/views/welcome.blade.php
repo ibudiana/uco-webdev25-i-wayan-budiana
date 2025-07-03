@@ -62,5 +62,81 @@
     @empty
     @endforelse
 </div>
+
+<div class="mt-10 mx-auto max-w-7xl">
+    <h2 class="text-3xl font-bold text-center">Pertanyaan yang Sering Diajukan (FAQ)</h2>
+
+    <div class="mt-10 space-y-4">
+
+      <!-- FAQ Item -->
+      <div x-data="{ open: false }" class="bg-white shadow rounded-lg p-4">
+        <button @click="open = !open" class="w-full text-left flex justify-between items-center">
+          <span class="font-semibold">1. Bagaimana cara memesan produk?</span>
+          <svg :class="{'rotate-180': open}" class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div x-show="open" x-transition class="mt-2 text-gray-600">
+          Pilih produk yang Anda inginkan, klik tombol "Beli Sekarang", lalu ikuti instruksi untuk menyelesaikan pesanan dan pembayaran.
+        </div>
+      </div>
+
+      <!-- FAQ Item -->
+      <div x-data="{ open: false }" class="bg-white shadow rounded-lg p-4">
+        <button @click="open = !open" class="w-full text-left flex justify-between items-center">
+          <span class="font-semibold">2. Apa metode pembayaran yang tersedia?</span>
+          <svg :class="{'rotate-180': open}" class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div x-show="open" x-transition class="mt-2 text-gray-600">
+          Kami menerima pembayaran melalui transfer bank, e-wallet (OVO, Dana, GoPay), dan kartu kredit.
+        </div>
+      </div>
+
+      <!-- FAQ Item -->
+      <div x-data="{ open: false }" class="bg-white shadow rounded-lg p-4">
+        <button @click="open = !open" class="w-full text-left flex justify-between items-center">
+          <span class="font-semibold">3. Berapa lama waktu pengiriman?</span>
+          <svg :class="{'rotate-180': open}" class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div x-show="open" x-transition class="mt-2 text-gray-600">
+          Pengiriman biasanya memakan waktu 2–5 hari kerja tergantung lokasi Anda. Kami akan mengirimkan nomor resi setelah pesanan dikirim.
+        </div>
+      </div>
+
+      <!-- FAQ Item -->
+      <div x-data="{ open: false }" class="bg-white shadow rounded-lg p-4">
+        <button @click="open = !open" class="w-full text-left flex justify-between items-center">
+          <span class="font-semibold">4. Apakah bisa melakukan retur atau pengembalian barang?</span>
+          <svg :class="{'rotate-180': open}" class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div x-show="open" x-transition class="mt-2 text-gray-600">
+          Ya, retur dapat dilakukan maksimal 7 hari setelah barang diterima, dengan syarat barang masih dalam kondisi seperti saat diterima.
+        </div>
+      </div>
+
+      <!-- FAQ Item -->
+      <div x-data="{ open: false }" class="bg-white shadow rounded-lg p-4">
+        <button @click="open = !open" class="w-full text-left flex justify-between items-center">
+          <span class="font-semibold">5. Bagaimana jika barang yang diterima rusak?</span>
+          <svg :class="{'rotate-180': open}" class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div x-show="open" x-transition class="mt-2 text-gray-600">
+          Silakan hubungi customer service kami dengan foto bukti kerusakan. Kami akan membantu Anda melakukan penggantian.
+        </div>
+      </div>
+
+    </div>
+
+</div>
+
+
 @endsection
 {{-- End Home Content --}}

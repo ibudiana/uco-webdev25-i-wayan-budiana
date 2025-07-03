@@ -103,4 +103,14 @@ class Product extends Model
     {
         return $this->hasMany(CartItem::class);
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(ProductReview::class);
+    }
+
+    public function averageRating()
+    {
+        return $this->reviews()->avg('rating');
+    }
 }

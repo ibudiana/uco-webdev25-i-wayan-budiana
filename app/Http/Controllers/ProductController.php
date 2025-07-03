@@ -188,7 +188,7 @@ class ProductController extends Controller
     public function show(string $slug)
     {
         //Show product by slug
-        $product = Product::with(['brand', 'category', 'images', 'variants.attributeValues.attribute'])->where('slug', $slug)->firstOrFail();
+        $product = Product::with(['brand', 'category', 'images', 'variants.attributeValues.attribute', 'reviews.user'])->where('slug', $slug)->firstOrFail();
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
         }
