@@ -9,6 +9,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\NewsletterSubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 // Routes that require authentication auth only
@@ -72,10 +73,8 @@ Route::group([], function () {
 
     Route::resource('blog', BlogPostController::class)->only(['index', 'show']);
 
-    // Blog routes
-    // Route::resource('blog', BlogPostController::class)->parameters([
-    //     'blog' => 'blogPost:slug'
-    // ]);
+    // Subscriber routes
+    Route::post('subscribe', [NewsletterSubscriptionController::class, 'store'])->name('subscribe.store');
 });
 
 require __DIR__ . '/auth.php';
