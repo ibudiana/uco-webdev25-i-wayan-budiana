@@ -137,6 +137,27 @@
 
 </div>
 
+<div class="mt-10 mx-auto max-w-7xl">
+    <h2 class="text-3xl font-bold text-center">Featured Articles</h2>
+    <div class="mt-10 mx-auto max-w-7xl grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+        @foreach($posts as $post)
+            <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden flex flex-col">
+                    @if($post->image)
+                    <img src="{{-- {{ asset('storage/' . $post->image) }} --}}" alt="{{ $post->title }}" class="w-full h-48 object-cover">
+                @endif
+                <div class="p-6 flex flex-col flex-grow">
+                    <h2 class="text-xl font-bold mb-2"><a href="{{ route('blog.show', $post->slug) }}">{{ $post->title }}</a></h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">By {{ $post->author->name }} on {{ $post->created_at->format('M d, Y') }}</p>
+                    <div class="prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 flex-grow">
+                        {{ Str::limit($post->content, 100) }}
+                    </div>
+                    <a href="{{ route('blog.show', $post->slug) }}" class="text-blue-500 hover:text-blue-700 font-semibold mt-4 inline-block self-start">Read More &rarr;</a>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
+
 
 @endsection
 {{-- End Home Content --}}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BlogPost;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,13 @@ class HomeController extends Controller
             ->take(10)
             ->get();
 
-        return view('welcome', compact('products'));
+        $posts = BlogPost::query()
+            ->with('author')
+            ->latest()
+            ->take(5)
+            ->get();
+
+        return view('welcome', compact('products', 'posts'));
     }
 
     /**
