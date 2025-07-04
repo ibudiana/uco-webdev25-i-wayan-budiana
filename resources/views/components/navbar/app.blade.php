@@ -1,11 +1,11 @@
 {{-- Navbar Section  --}}
-<header x-data="{navbarOpen: false}" class="w-full dark:bg-gray-100 shadow">
+<header x-data="{navbarOpen: false}" class="dark:bg-gray-100 shadow">
     <div class="container mx-auto">
-        <div class="relative flex items-center justify-between">
-            <div class="w-60 max-w-full px-4 ml-8 lg:ml-0">
-                <a href="#" class="flex items-center text-2xl font-bold text-amber-900 w-full py-5 space-x-2">
-                    <x-application-logo class="w-10 h-10 fill-current text-gray-500" />
-                    <span>IBUDIANA</span>
+        <div class="relative flex items-center justify-between mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
+            <div class="flex-shrink-0">
+                <a href="/" class="flex items-center text-2xl font-bold text-amber-900 dark:text-amber-400 py-4 space-x-2">
+                    <x-application-logo class="w-10 h-10 fill-current" />
+                    <span class="hidden sm:block">IBUDIANA</span>
                 </a>
             </div>
 
@@ -32,20 +32,28 @@
 
                 </div>
 
-                {{-- Icons Button --}}
+                {{-- Icons Button Links --}}
                 <div class="flex items-center space-x-4 mr-2">
-                    {{-- Cart --}}
-                    {{-- Search --}}
+
                     @guest
-                    <x-icon-button />
+                    {{-- <x-icon-button /> --}}
+                    <a href="{{ route('login') }}" class="hidden sm:inline-block text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-amber-900 dark:hover:text-amber-400">Login</a>
+                    <a href="{{ route('register') }}" class="hidden sm:inline-block bg-amber-800 hover:bg-amber-900 text-white text-sm font-bold py-2 px-4 rounded-lg transition-colors">
+                        Register
+                    </a>
                     @endguest
+
                     @auth
-                    <!-- Settings Dropdown -->
                     <div class="hidden sm:flex sm:items-center sm:ms-6">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
-                                <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                    <div>{{ Auth::user()->name }}</div>
+                                <button class="inline-flex items-center px-2 py-1 border border-transparent text-sm leading-4 font-medium rounded-full text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:outline-none transition ease-in-out duration-150">
+
+                                    {{-- Avatar dari UI-Avatars.com --}}
+                                    <img class="h-8 w-8 rounded-full object-cover" src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=a0a0a0&color=fff&bold=true" alt="{{ Auth::user()->name }}">
+
+                                    {{-- Nama User --}}
+                                    <div class="ms-2 hidden sm:block">{{ Auth::user()->name }}</div>
 
                                     <div class="ms-1">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

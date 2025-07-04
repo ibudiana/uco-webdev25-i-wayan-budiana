@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             ProductVariantAttributeValueSeeder::class,
             RoleSeeder::class,
             ProductImageSeeder::class,
+            BlogPostSeeder::class,
         ]);
     }
 }

@@ -7,6 +7,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductReviewController;
+use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 // Routes that require authentication auth only
@@ -52,6 +54,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/cart/store', [CartController::class, 'store'])->name('cart.store');
     Route::get('/cart/fetch', [CartController::class, 'fetch'])->name('cart.fetch');
+
+    // Blog routes
+    Route::resource('blog', BlogPostController::class);
+
+    // Comment routes
+    Route::post('blog/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 });
 
 
@@ -61,6 +69,13 @@ Route::group([], function () {
 
     // Products index and show
     Route::resource('products', ProductController::class)->only(['index', 'show']);
+
+    Route::resource('blog', BlogPostController::class)->only(['index', 'show']);
+
+    // Blog routes
+    // Route::resource('blog', BlogPostController::class)->parameters([
+    //     'blog' => 'blogPost:slug'
+    // ]);
 });
 
 require __DIR__ . '/auth.php';
