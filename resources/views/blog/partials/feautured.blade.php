@@ -24,9 +24,11 @@
             {{ Str::limit($featuredPost->content, 200) }}
         </p>
         <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+            <span>By {{ $featuredPost->author->name }}</span>
+            <span class="mx-2">&bull;</span>
             <span>{{ $featuredPost->created_at->format('F d, Y') }}</span>
             <span class="mx-2">&bull;</span>
-            <span>0 Comments</span>
+            <span>{{ $featuredPost->comments->count() }} Comments</span>
         </div>
     </div>
 </div>

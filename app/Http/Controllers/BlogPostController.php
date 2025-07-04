@@ -28,7 +28,7 @@ class BlogPostController extends Controller
             $featuredPost = null;
         } else {
             // Ambil postingan terbaru sebagai postingan unggulan
-            $featuredPost = BlogPost::latest()->first();
+            $featuredPost = BlogPost::latest()->with('author', 'comments')->first();
             // Ambil postingan lainnya dengan pagination, lewati postingan pertama
             $otherPosts = BlogPost::latest()->skip(1)->paginate(6);
         }
