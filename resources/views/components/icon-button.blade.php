@@ -3,6 +3,6 @@
     'route' => 'dashboard',
 ])
 
-<a href="{{ route($route) }}" class="font-medium text-gray-900 hover:text-amber-900">
+<a href="{{ route($route) }}" class="font-medium text-gray-900 dark:text-gray-50 hover:text-amber-900">
     <i class="{{ $icon }}"></i>
 </a>

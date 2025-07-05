@@ -26,7 +26,7 @@
         $menus = [
             ['label' => 'Home', 'url' => '/'],
             ['label' => 'Products', 'url' => '/products'],
-            ['label' => 'Blog', 'url' => '/blog']
+            ['label' => 'Blog', 'url' => '/blogs']
         ];
     @endphp
 

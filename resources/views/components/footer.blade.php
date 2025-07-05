@@ -144,8 +144,12 @@
       <div class="mb-4 md:mb-0">
         <strong>Order faster with our App!</strong>
         <div class="flex gap-3 mt-2">
-          <img src="appstore.png" alt="App Store" class="h-10">
-          <img src="googleplay.png" alt="Google Play" class="h-10">
+          <a href="#" class="flex items-center">
+            <i class="fab fa-apple text-gray-500 text-2xl"></i>
+          </a>
+          <a href="#" class="flex items-center">
+            <i class="fab fa-google-play text-gray-500 text-2xl"></i>
+          </a>
         </div>
       </div>
       <div class="flex gap-6 text-2xl text-gray-500">
@@ -159,7 +163,7 @@
 
   <!-- Bottom Line -->
   <div class="bg-gray-200 py-4 text-center text-xs text-gray-600">
-    Copyright & Design By <strong>Parv Infotech</strong> -2025
+    Copyright & Design By <strong>I Wayan Budiana</strong> - {{ date('Y') }}. All rights reserved.
   </div>
 </footer>
 

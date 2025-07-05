@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Create New Post')
 
@@ -6,7 +6,7 @@
 <div class="container mx-auto px-4 py-8 bg-white dark:bg-gray-800 shadow-lg rounded-lg mt-8 mb-8">
     <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Create New Blog Post</h1>
 
-    <form action="{{ route('blog.store') }}" method="POST">
+    <form action="{{ route('blogs.store') }}" method="POST">
         @csrf
         <div class="mb-4">
             <label for="title" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Title</label>
@@ -24,7 +24,7 @@
         </div>
         <div class="flex items-center justify-between">
             <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:scale-105">Create Post</button>
-            <a href="{{ route('blog.index') }}" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">Cancel</a>
+            <a href="{{ route('blogs.index') }}" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">Cancel</a>
         </div>
     </form>
 </div>

@@ -50,14 +50,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('/', [TransactionController::class, 'index'])->name('index');
         Route::get('/{id}', [TransactionController::class, 'show'])->name('show');
-        Route::patch('/{id}/status', [TransactionController::class, 'updateStatus'])->name('updateStatus');
+        Route::patch('/{transaction}/status', [TransactionController::class, 'updateStatus'])->name('updateStatus');
     });
 
     Route::post('/cart/store', [CartController::class, 'store'])->name('cart.store');
     Route::get('/cart/fetch', [CartController::class, 'fetch'])->name('cart.fetch');
 
     // Blog routes
-    Route::resource('blog', BlogPostController::class);
+    Route::resource('blogs', BlogPostController::class);
 
     // Comment routes
     Route::post('blog/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
@@ -71,7 +71,7 @@ Route::group([], function () {
     // Products index and show
     Route::resource('products', ProductController::class)->only(['index', 'show']);
 
-    Route::resource('blog', BlogPostController::class)->only(['index', 'show']);
+    Route::resource('blogs', BlogPostController::class)->only(['index', 'show']);
 
     // Subscriber routes
     Route::post('subscribe', [NewsletterSubscriptionController::class, 'store'])->name('subscribe.store');

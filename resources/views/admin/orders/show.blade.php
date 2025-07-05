@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <div class="py-12">
@@ -41,14 +41,16 @@
                 </a>
 
                 @if ($transaction->status !== 'completed')
-                    <form action="{{ route('transaction.updateStatus', $transaction->id) }}" method="POST">
-                        @csrf
-                        @method('PATCH')
-                        <button type="submit"
-                            class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
-                            Mark as Complete
-                        </button>
-                    </form>
+                    @can('manage-transactions')
+                        <form action="{{ route('transaction.updateStatus', $transaction->id) }}" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit"
+                                class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+                                Mark as Complete
+                            </button>
+                        </form>
+                    @endcan
                 @else
                     <span class="inline-block px-4 py-2 bg-green-100 text-green-800 rounded text-sm font-semibold">
                         Completed

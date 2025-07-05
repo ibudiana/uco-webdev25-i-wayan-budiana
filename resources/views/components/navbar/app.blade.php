@@ -1,7 +1,7 @@
 {{-- Navbar Section  --}}
 <header x-data="{navbarOpen: false}" class="dark:bg-gray-100 shadow">
     <div class="container mx-auto">
-        <div class="relative flex items-center justify-between mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
+        <div class="relative flex items-center justify-between mx-auto px-4 sm:static sm:px-6 lg:px-8">
             <div class="flex-shrink-0">
                 <a href="/" class="flex items-center text-2xl font-bold text-amber-900 dark:text-amber-400 py-4 space-x-2">
                     <x-application-logo class="w-10 h-10 fill-current" />
@@ -22,7 +22,7 @@
                         <ul class="flex flex-col space-y-4 lg:flex-row lg:space-y-0 lg:space-x-6">
                             @foreach ($menus as $menu)
                                 <li>
-                                    <a href="{{ $menu['url'] }}" class="text-gray-600 font-medium text-dark hover:text-amber-900 lg:ml-10 lg:inline-flex">
+                                    <a href="{{ $menu['url'] }}" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
                                         {{ $menu['label'] }}
                                     </a>
                                 </li>
@@ -37,7 +37,7 @@
 
                     @guest
                     {{-- <x-icon-button /> --}}
-                    <a href="{{ route('login') }}" class="hidden sm:inline-block text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-amber-900 dark:hover:text-amber-400">Login</a>
+                    <a href="{{ route('login') }}" class="hidden sm:inline-block text-sm font-medium text-gray-700 hover:text-amber-900 dark:hover:text-amber-400">Login</a>
                     <a href="{{ route('register') }}" class="hidden sm:inline-block bg-amber-800 hover:bg-amber-900 text-white text-sm font-bold py-2 px-4 rounded-lg transition-colors">
                         Register
                     </a>

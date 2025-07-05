@@ -1,21 +1,18 @@
 @extends('layouts.admin')
 
-<x-alerts.success />
-
 @section('content')
     <div class="bg-white dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-gray-900 dark:text-gray-50">
-            {{ __("Products List") }}
+            {{ __("Blog Posts") }}
         </div>
     </div>
-
     <div class="container mx-auto">
         <div class=" overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900 dark:text-gray-50">
+            <div class="p-6 text-gray-900">
                 <div class="flex flex-row-reverse text-gray-900 dark:text-gray-50 justify-between items-center mb-6">
-                    {{-- <h2 class="text-xl font-semibold">Products</h2> --}}
-                    <a href="{{ route('products.create') }}" class="inline-flex items-center px-4 py-2 bg-amber-500 text-white rounded hover:bg-amber-600">
-                        <i class="fa-solid fa-plus mr-2"></i> Add New Product
+                    {{-- <h2 class="text-xl font-semibold">Blog Posts</h2> --}}
+                    <a href="{{ route('blogs.create') }}" class="inline-flex items-center px-4 py-2 bg-amber-500 text-white rounded hover:bg-amber-600">
+                        <i class="fa-solid fa-plus mr-2"></i> Add New Post
                     </a>
                 </div>
                 <div class="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
@@ -27,28 +24,28 @@
                                 <th class="px-5 py-3 sm:px-6">
                                     <div class="flex items-center">
                                     <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                                        Product Name
+                                        Post Name
                                     </p>
                                     </div>
                                 </th>
                                 <th class="px-5 py-3 sm:px-6">
                                     <div class="flex items-center">
                                     <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                                        Brand
+                                        Title
                                     </p>
                                     </div>
                                 </th>
                                 <th class="px-5 py-3 sm:px-6">
                                     <div class="flex items-center">
                                     <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                                        Category
+                                        Author
                                     </p>
                                     </div>
                                 </th>
                                 <th class="px-5 py-3 sm:px-6">
                                     <div class="flex items-center">
                                     <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                                        Price
+                                        Comments
                                     </p>
                                     </div>
                                 </th>
@@ -64,8 +61,8 @@
                             <!-- table header end -->
 
                             <!-- table body start -->
-                                @forelse ($products as $product)
-                                    <x-products.table :product="$product" />
+                                @forelse ($posts as $post)
+                                    @include('admin.blog.partials.table', ['post' => $post])
                                 @empty
                                 <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
                                     <tr>
@@ -86,10 +83,9 @@
 
                 {{-- Pagination Links --}}
                 <div class="mt-8">
-                    {{ $products->links() }}
+                    {{ $posts->links() }}
                 </div>
             </div>
         </div>
     </div>
-
 @endsection

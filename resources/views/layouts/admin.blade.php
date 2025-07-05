@@ -25,15 +25,29 @@
             ['label' => 'Products', 'url' => '/products']
         ];
     @endphp
-    <x-navbar.admin :menus="$menus" />
 
     <!-- Page Content -->
-    <main class="container mx-auto">
-        @yield('content')
+    <main
+        x-data="{
+            isSidebarOpen: window.innerWidth >= 1024,
+            toggleSidebar() { this.isSidebarOpen = !this.isSidebarOpen }
+        }"
+        class="flex min-h-screen"
+    >
+
+        <x-navbar.sidebar :menus="$menus" />
+
+        <!-- START: Main Content -->
+        <div class="flex-1 flex flex-col transition-all duration-300 ease-in-out" :class="isSidebarOpen ? 'lg:ml-64' : ''">
+            <x-navbar.topbar />
+            <main class="flex-1 p-4 md:p-6">
+                @yield('content')
+            </main>
+        </div>
         {{-- @if (isset($slot)) {{ $slot }} @endif --}}
     </main>
 
     <!-- Footer Section -->
-    <x-footer/>
+    {{-- <x-footer/> --}}
 </body>
 </html>

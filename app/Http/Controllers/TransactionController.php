@@ -17,33 +17,50 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::with(['items.product', 'paymentMethod'])
-            ->where('user_id', Auth::id())
-            ->orderBy('transaction_date', 'desc')
-            ->get();
 
-        return view('user.transaction.index', compact('transactions'));
+        $query = Transaction::with(['user', 'items.product', 'paymentMethod']);
 
-        // return response()->json($transactions);
+        // Dapatkan user yang sedang login.
+        $user = Auth::user();
+
+        // Jika pengguna yang login bukan admin, filter transaksi berdasarkan user_id.
+        if (!$user->hasRole('admin')) {
+            $query->where('user_id', $user->id);
+        }
+
+        $transactions = $query->orderBy('transaction_date', 'desc')->get();
+
+        return view('admin.orders.index', compact('transactions'));
     }
 
     public function show($id)
     {
-        $transaction = Transaction::with(['items.product', 'paymentMethod'])
-            ->where('user_id', Auth::id())
-            ->findOrFail($id);
+        $user = Auth::user();
 
-        return view('user.transaction.show', compact('transaction'));
+        if ($user->hasRole('admin')) {
+            // Admin can view any transaction
+            $transaction = Transaction::with(['items.product', 'paymentMethod'])
+                ->findOrFail($id);
+        } else {
+            // Regular user can only view their own transactions
+            $transaction = Transaction::with(['items.product', 'paymentMethod'])
+                ->where('user_id', $user->id)
+                ->findOrFail($id);
+        }
+
+        return view('admin.orders.show', compact('transaction'));
     }
 
-    public function updateStatus(Request $request, $id)
+    public function updateStatus(Request $request, Transaction $transaction)
     {
-        $transaction = Transaction::where('user_id', Auth::id())->findOrFail($id);
 
-        $transaction->status = 'completed';
-        $transaction->save();
+        if (!Auth::user()->can('manage-transactions')) {
+            abort(403, 'Unauthorized action.');
+        }
 
-        return redirect()->back()->with('success', 'Transaction marked as complete.');
+        $transaction->update(['status' => 'completed']);
+
+        return back()->with('success', 'Transaction status has been updated successfully!');
     }
 
 

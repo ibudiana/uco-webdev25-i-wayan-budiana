@@ -18,7 +18,7 @@
     {{-- Konten Teks Postingan Unggulan --}}
     <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md -mt-16 mx-4 relative z-10">
             <h1 class="text-3xl font-bold mb-3 text-gray-900 dark:text-white">
-            <a href="{{ route('blog.show', $featuredPost->slug) }}">{{ $featuredPost->title }}</a>
+            <a href="{{ route('blogs.show', $featuredPost->slug) }}">{{ $featuredPost->title }}</a>
         </h1>
         <p class="text-gray-700 dark:text-gray-300 mb-4">
             {{ Str::limit($featuredPost->content, 200) }}

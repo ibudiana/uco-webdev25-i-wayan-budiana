@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Edit Post')
 
@@ -6,7 +6,7 @@
 <div class="container mx-auto px-4 py-8 bg-white dark:bg-gray-800 shadow-lg rounded-lg mt-8 mb-8">
     <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Edit Blog Post</h1>
 
-    <form action="{{ route('blog.update', $post) }}" method="POST">
+    <form action="{{ route('blogs.update', $post->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="mb-4">
@@ -25,7 +25,7 @@
         </div>
         <div class="flex items-center justify-between">
             <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:scale-105">Update Post</button>
-            <a href="{{ route('blog.show', $post) }}" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">Cancel</a>
+            <a href="{{ route('blogs.index') }}" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">Cancel</a>
         </div>
     </form>
 </div>

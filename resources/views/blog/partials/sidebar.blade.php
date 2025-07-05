@@ -3,7 +3,7 @@
     {{-- Kotak Pencarian --}}
     <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md mb-8">
         <h3 class="font-bold text-lg mb-4 dark:text-white">SEARCH</h3>
-        <form action="{{ route('blog.index') }}" method="GET" class="flex">
+        <form action="{{ route('blogs.index') }}" method="GET" class="flex">
             <input type="text" name="search" placeholder="Searching..." class="w-full border-gray-300 dark:border-gray-600 dark:bg-gray-800 rounded-l-md focus:ring-blue-500 focus:border-blue-500">
             <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold p-3 rounded-r-md">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -26,7 +26,7 @@
                     >
                     <div>
                         <h4 class="font-semibold leading-tight dark:text-white">
-                            <a href="{{ route('blog.show', $recent->slug) }}">{{ $recent->title }}</a>
+                            <a href="{{ route('blogs.show', $recent->slug) }}">{{ $recent->title }}</a>
                         </h4>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $recent->created_at->format('d M Y') }}</p>
                     </div>
