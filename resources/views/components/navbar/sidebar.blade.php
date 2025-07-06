@@ -12,24 +12,30 @@
     <!-- Menu Navigasi -->
     <nav class="py-4 px-2">
         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-            <i class="fas fa-tachometer-alt text-xl pr-4"></i>
+            <i class="fas fa-tachometer-alt text-md pr-4"></i>
             {{ __('Dashboard') }}
         </x-nav-link>
 
         @if (Auth::user()->hasRole('admin'))
             <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
-                <i class="fab fa-product-hunt text-xl pr-4"></i>
+                <i class="fab fa-product-hunt text-md pr-4"></i>
                 {{ __('Products') }}
             </x-nav-link>
 
             <x-nav-link :href="route('blogs.index')" :active="request()->routeIs('blogs.*')">
-                <i class="fas fa-blog text-xl pr-4"></i>
+                <i class="fas fa-blog text-md pr-4"></i>
                 {{ __('Posts') }}
+            </x-nav-link>
+
+            <x-nav-link :href="route('subscribers.index')" :active="request()->routeIs('subscribers.*')">
+                <i class="fas fa-newspaper text-md pr-3"></i>
+
+                {{ __('Subscribers') }}
             </x-nav-link>
         @endif
 
         <x-nav-link :href="route('transaction.index')" :active="request()->routeIs('transaction.*')">
-            <i class="fas fa-shopping-cart text-xl pr-4"></i>
+            <i class="fas fa-shopping-cart text-md pr-3"></i>
             {{ __('Orders') }}
         </x-nav-link>
 

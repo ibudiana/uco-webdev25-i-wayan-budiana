@@ -44,15 +44,14 @@ class BlogPostController extends Controller
             // Featured post dengan comments terbanyak
             $featuredPost = BlogPost::withCount('comments')->orderBy('comments_count', 'desc')->first();
 
-
             $otherPostsQuery = BlogPost::latest();
             if ($featuredPost) {
                 $otherPostsQuery->where('id', '!=', $featuredPost->id);
             }
-        }
 
-        // Ambil postingan lain selain featured post
-        $otherPosts = $otherPostsQuery->paginate(6);
+            // Ambil postingan lain selain featured post
+            $otherPosts = $otherPostsQuery->paginate(6);
+        }
 
         // Ambil 4 postingan terbaru untuk sidebar
         $recentPosts = BlogPost::inRandomOrder()->take(5)->get();

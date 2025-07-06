@@ -59,6 +59,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Blog routes
     Route::resource('blogs', BlogPostController::class);
 
+    // Subscriber routes
+    Route::resource('subscribers', NewsletterSubscriptionController::class);
+
     // Comment routes
     Route::post('blog/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 });
@@ -74,7 +77,8 @@ Route::group([], function () {
     Route::resource('blogs', BlogPostController::class)->only(['index', 'show']);
 
     // Subscriber routes
-    Route::post('subscribe', [NewsletterSubscriptionController::class, 'store'])->name('subscribe.store');
+    Route::resource('subscribers', NewsletterSubscriptionController::class)->only(['store']);
+    // Route::post('subscribers', [NewsletterSubscriptionController::class, 'store'])->name('subscribers.store');
 });
 
 require __DIR__ . '/auth.php';
