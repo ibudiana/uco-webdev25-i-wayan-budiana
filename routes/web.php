@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\NewsletterSubscriptionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 // Routes that require authentication auth only
@@ -64,6 +65,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Comment routes
     Route::post('blog/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+
+    // User management routes
+    Route::middleware(['can:manage-users'])->group(function () {
+        Route::resource('users', UserController::class);
+    });
 });
 
 

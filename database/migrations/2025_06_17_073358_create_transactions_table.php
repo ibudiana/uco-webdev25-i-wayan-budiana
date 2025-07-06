@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             $table->enum('status', ['pending', 'completed', 'failed'])->default('pending');
             $table->text('description')->nullable();
+            $table->foreignId('shipping_address_id')->nullable()->constrained('shipping_addresses')->onDelete('set null');
             $table->timestamp('transaction_date')->useCurrent();
             $table->timestamps();
         });

@@ -3,7 +3,7 @@
 @section('content')
     <div class="bg-white dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-gray-900 dark:text-gray-50">
-            {{ __("Subscriber List") }}
+            {{ __("User List") }}
         </div>
     </div>
     <div class="container mx-auto">
@@ -61,16 +61,16 @@
                             <!-- table header end -->
 
                             <!-- table body start -->
-                            @forelse ($subscribers as $subscriber)
-                                @include('admin.subscriber.partials.table', ['subscriber' => $subscriber])
+                            @forelse ($users as $user)
+                                @include('admin.users.partials.table', ['user' => $user])
                             @empty
                             <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
                                 <tr>
                                     <td colspan="5" class="px-5 py-4 sm:px-6 text-center">
-                                        <i class="fa-solid fa-user text-4xl mb-4 text-amber-500"></i>
-                                        <h3 class="text-lg font-semibold mb-2">No Subscribers Found</h3>
+                                        <i class="fa-solid fa-box-open text-4xl mb-4 text-amber-500"></i>
+                                        <h3 class="text-lg font-semibold mb-2">No products found</h3>
                                         <p class="text-gray-600 dark:text-gray-50">
-                                            Sorry, we couldn't find any subscribers that match your search. Try using different keywords or browse other categories.
+                                            Sorry, we couldn't find any products that match your search. Try using different keywords or browse other categories.
                                         </p>
                                     </td>
                                 </tr>
@@ -83,7 +83,7 @@
 
                 {{-- Pagination Links --}}
                 <div class="mt-8">
-                    {{ $subscribers->links() }}
+                    {{ $users->links() }}
                 </div>
 
                 <x-alerts.custom />

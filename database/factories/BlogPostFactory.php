@@ -19,11 +19,16 @@ class BlogPostFactory extends Factory
     public function definition(): array
     {
         $title = $this->faker->sentence(rand(5, 10));
+        // Ambil user role admin
+        $user = User::whereHas('roles', function ($query) {
+            $query->where('name', 'admin');
+        })->inRandomOrder()->first();
+
         return [
             'title' => $title,
             'slug' => Str::slug($title),
             'content' => $this->faker->paragraphs(rand(5, 10), true),
-            'user_id' => User::factory(),
+            'user_id' => $user->id,
         ];
     }
 }

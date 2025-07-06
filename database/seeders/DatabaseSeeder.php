@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             ProductImageSeeder::class,
             BlogPostSeeder::class,
+            PaymentMethodSeeder::class,
         ]);
     }
 }

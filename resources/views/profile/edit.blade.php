@@ -16,11 +16,13 @@
                     </div>
                 </div>
 
-                <div class="p-4 sm:p-8 bg-gray-50 dark:bg-gray-900 shadow sm:rounded-lg">
-                    <div class="max-w-xl">
-                        @include('profile.partials.payment-methode-form')
+                @if (Auth::user()->hasRole('admin'))
+                    <div class="p-4 sm:p-8 bg-gray-50 dark:bg-gray-900 shadow sm:rounded-lg">
+                        <div class="max-w-xl">
+                            @include('profile.partials.payment-methode-form')
+                        </div>
                     </div>
-                </div>
+                @endif
 
                 <div class="p-4 sm:p-8 bg-gray-50 dark:bg-gray-900 shadow sm:rounded-lg">
                     <div class="max-w-xl">

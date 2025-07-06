@@ -14,15 +14,17 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         //create categories
-        $categories = [
-            ['name' => 'Electronics', 'slug' => 'electronics'],
-            ['name' => 'Fashion', 'slug' => 'fashion'],
-            ['name' => 'Home & Garden', 'slug' => 'home-garden'],
-            ['name' => 'Sports', 'slug' => 'sports'],
-            ['name' => 'Toys', 'slug' => 'toys'],
-        ];
-        foreach ($categories as $category) {
-            Category::create($category);
-        }
+        // $categories = [
+        //     ['name' => 'Electronics', 'slug' => 'electronics'],
+        //     ['name' => 'Fashion', 'slug' => 'fashion'],
+        //     ['name' => 'Home & Garden', 'slug' => 'home-garden'],
+        //     ['name' => 'Sports', 'slug' => 'sports'],
+        //     ['name' => 'Toys', 'slug' => 'toys'],
+        // ];
+        // foreach ($categories as $category) {
+        //     Category::create($category);
+        // }
+        // Create 10 random categories using the factory
+        Category::factory()->count(5)->create();
     }
 }

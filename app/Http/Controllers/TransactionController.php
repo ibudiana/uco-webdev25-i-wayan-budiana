@@ -39,11 +39,11 @@ class TransactionController extends Controller
 
         if ($user->hasRole('admin')) {
             // Admin can view any transaction
-            $transaction = Transaction::with(['items.product', 'paymentMethod'])
+            $transaction = Transaction::with(['items.product', 'paymentMethod', 'shippingAddress'])
                 ->findOrFail($id);
         } else {
             // Regular user can only view their own transactions
-            $transaction = Transaction::with(['items.product', 'paymentMethod'])
+            $transaction = Transaction::with(['items.product', 'paymentMethod', 'shippingAddress'])
                 ->where('user_id', $user->id)
                 ->findOrFail($id);
         }
@@ -68,31 +68,55 @@ class TransactionController extends Controller
     public function showCheckoutForm()
     {
         $paymentMethods = PaymentMethod::pluck('type', 'id');
+        $shippingAddresses = Auth::user()->shippingAddresses()->get();
 
-        return view('user.transaction.checkout', compact('paymentMethods'));
+        return view('user.transaction.checkout', compact('paymentMethods', 'shippingAddresses'));
     }
 
     public function processCheckout(Request $request)
     {
         $request->validate([
             'cart_data'        => 'required|json',
-            'name'             => 'required|string|max:255',
-            'phone'            => ['required', 'string', 'max:20', 'regex:/^(\+62|0)[0-9]{8,15}$/'],
-            'address_line1'    => 'required|string|max:255',
-            'address_line2'    => 'nullable|string|max:255',
-            'city'             => 'required|string|max:100',
-            'state'            => 'required|string|max:100',
-            'postal_code'      => 'required|string|max:20',
-            'country'          => 'required|string|max:100',
             'payment_method'   => 'required|exists:payment_methods,id',
         ]);
 
         $user = Auth::user();
         $cart = json_decode($request->input('cart_data'), true);
 
-        // dd($request->payment_method);
-
         $total = collect($cart)->sum(fn($item) => $item['price'] * $item['qty']);
+
+        if ($request->shipping_address_id === 'new') {
+
+            $request->validate([
+                'name'             => 'required|string|max:255',
+                'phone'            => ['required', 'string', 'max:20', 'regex:/^(\+62|0)[0-9]{8,15}$/'],
+                'address_line1'    => 'required|string|max:255',
+                'address_line2'    => 'nullable|string|max:255',
+                'city'             => 'required|string|max:100',
+                'state'            => 'required|string|max:100',
+                'postal_code'      => 'required|string|max:20',
+                'country'          => 'required|string|max:100',
+            ]);
+
+            // Simpan Alamat
+            $shippingAddress = ShippingAddress::create([
+                'user_id' => $user->id,
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'address_line1' => $request->address_line1,
+                'address_line2' => $request->address_line2,
+                'city' => $request->city,
+                'state' => $request->state,
+                'postal_code' => $request->postal_code,
+                'country' => $request->country,
+                'is_default' => true,
+            ]);
+        } else {
+            // Ambil Alamat yang sudah ada
+            $shippingAddress = ShippingAddress::where('id', $request->shipping_address_id)
+                ->where('user_id', Auth::id())
+                ->firstOrFail();
+        }
 
         // Simpan transaksi
         $transaction = Transaction::create([
@@ -100,6 +124,7 @@ class TransactionController extends Controller
             'payment_method_id' => $request->payment_method,
             'amount' => $total,
             'status' => 'pending',
+            'shipping_address_id' => $shippingAddress->id,
             'description' => 'Checkout via form',
             'transaction_date' => now(),
         ]);
@@ -113,20 +138,6 @@ class TransactionController extends Controller
                 'item_price' => $item['price'],
             ]);
         }
-
-        // Simpan Alamat
-        ShippingAddress::create([
-            'user_id' => $user->id,
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'address_line1' => $request->address_line1,
-            'address_line2' => $request->address_line2,
-            'city' => $request->city,
-            'state' => $request->state,
-            'postal_code' => $request->postal_code,
-            'country' => $request->country,
-            'is_default' => true,
-        ]);
 
         // Hapus cart user di database
         // Ambil cart aktif user beserta itemsnya

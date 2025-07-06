@@ -14,15 +14,17 @@ class BrandSeeder extends Seeder
     public function run(): void
     {
         //creat brands
-        $brands = [
-            ['name' => 'Adidas', 'slug' => 'adidas'],
-            ['name' => 'Puma', 'slug' => 'puma'],
-            ['name' => 'Reebok', 'slug' => 'reebok'],
-            ['name' => 'Under Armour', 'slug' => 'under-armour'],
-            ['name' => 'New Balance', 'slug' => 'new-balance'],
-        ];
-        foreach ($brands as $brand) {
-            Brand::create($brand);
-        }
+        // $brands = [
+        //     ['name' => 'Adidas', 'slug' => 'adidas'],
+        //     ['name' => 'Puma', 'slug' => 'puma'],
+        //     ['name' => 'Reebok', 'slug' => 'reebok'],
+        //     ['name' => 'Under Armour', 'slug' => 'under-armour'],
+        //     ['name' => 'New Balance', 'slug' => 'new-balance'],
+        // ];
+        // foreach ($brands as $brand) {
+        //     Brand::create($brand);
+        // }
+        // Create 10 random brands using the factory
+        Brand::factory()->count(10)->create();
     }
 }

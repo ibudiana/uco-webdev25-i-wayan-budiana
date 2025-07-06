@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
@@ -21,7 +22,12 @@ class RoleSeeder extends Seeder
         // Buat atau ambil user admin (misalnya berdasarkan email)
         $admin = User::firstOrCreate(
             ['email' => 'ibudiana@student.ciputra.ac.id'],
-            ['name' => 'Admin', 'password' => bcrypt('password')]
+            [
+                'name' => 'Admin',
+                'password' => bcrypt('password'),
+                'email_verified_at' => now(),
+                'remember_token' => Str::random(10),
+            ]
         );
 
         // Assign role admin ke user tersebut
@@ -30,7 +36,12 @@ class RoleSeeder extends Seeder
         // Optional: buat user biasa
         $user = User::firstOrCreate(
             ['email' => 'yan.budiana@gmail.com'],
-            ['name' => 'User', 'password' => bcrypt('password')]
+            [
+                'name' => 'User',
+                'password' => bcrypt('password'),
+                'email_verified_at' => now(),
+                'remember_token' => Str::random(10),
+            ]
         );
 
         // Assign role user

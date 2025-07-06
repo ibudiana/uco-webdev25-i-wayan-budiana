@@ -48,6 +48,6 @@
     </main>
 
     <!-- Footer Section -->
-    {{-- <x-footer/> --}}
+    <x-scripts.footer />
 </body>
 </html>
