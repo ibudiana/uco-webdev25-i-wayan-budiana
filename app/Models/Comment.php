@@ -23,6 +23,6 @@ class Comment extends Model
 
     public function post()
     {
-        return $this->belongsTo(BlogPost::class);
+        return $this->belongsTo(BlogPost::class, 'blog_post_id');
     }
 }

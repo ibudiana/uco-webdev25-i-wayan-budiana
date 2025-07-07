@@ -33,9 +33,8 @@ Route::middleware(['auth'])->group(function () {
 
 // Routes that require authentication and email verification
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // If user is admin
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
     Route::resource('products', ProductController::class);
     Route::delete('/products/image/{id}', [ProductController::class, 'deleteImage'])->name('product.image.delete');

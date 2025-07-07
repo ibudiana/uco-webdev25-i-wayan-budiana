@@ -27,57 +27,47 @@
     <!-- Grid untuk card statistik -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
         <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-sm font-medium text-gray-500">Total Pengguna</h3>
-            <p class="text-3xl font-bold mt-2">1,257</p>
+            <h3 class="text-sm font-medium text-gray-500">Users</h3>
+            <p class="text-3xl font-bold mt-2">{{ $userCount }}</p>
         </div>
         <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-sm font-medium text-gray-500">Pendapatan Hari Ini</h3>
-            <p class="text-3xl font-bold mt-2">Rp 2.5jt</p>
+            <h3 class="text-sm font-medium text-gray-500">Products</h3>
+            <p class="text-3xl font-bold mt-2">{{ $productCount }}</p>
         </div>
         <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-sm font-medium text-gray-500">Pesanan Baru</h3>
-            <p class="text-3xl font-bold mt-2">84</p>
+            <h3 class="text-sm font-medium text-gray-500">Orders</h3>
+            <p class="text-3xl font-bold mt-2">{{ $transactionCount }}</p>
         </div>
         <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-sm font-medium text-gray-500">Tiket Bantuan</h3>
-            <p class="text-3xl font-bold mt-2">12</p>
+            <h3 class="text-sm font-medium text-gray-500">Posts</h3>
+            <p class="text-3xl font-bold mt-2">{{ $blogPostCount }}</p>
         </div>
     </div>
 
     <!-- Tabel data -->
     <div class="bg-white rounded-lg shadow-md overflow-hidden">
         <div class="p-4 border-b">
-            <h2 class="text-xl font-semibold">Pengguna Terbaru</h2>
+            <h2 class="text-xl font-semibold">Comments</h2>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full min-w-full">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jabatan</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Peran</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Post</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Comment</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">Budi Santoso</td>
-                        <td class="px-6 py-4 whitespace-nowrap">UI/UX Designer</td>
-                        <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Aktif</span></td>
-                        <td class="px-6 py-4 whitespace-nowrap">Admin</td>
-                    </tr>
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">Citra Lestari</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Developer</td>
-                        <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Aktif</span></td>
-                        <td class="px-6 py-4 whitespace-nowrap">Member</td>
-                    </tr>
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">Agus Wijaya</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Project Manager</td>
-                        <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Nonaktif</span></td>
-                        <td class="px-6 py-4 whitespace-nowrap">Member</td>
-                    </tr>
+                    @foreach ($userComments as $comment)
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $comment->user->name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap"><a href="{{ route('blogs.show', $comment->post->slug) }}">{{ $comment->post->title }}</a></td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $comment->content }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $comment->created_at->diffForHumans() }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\BlogPost;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Transaction;
+use App\Models\User;
+use App\Models\Comment;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -27,6 +31,26 @@ class HomeController extends Controller
             ->get();
 
         return view('welcome', compact('products', 'posts'));
+    }
+
+    public function dashboard()
+    {
+        if (Auth::check() && Auth::user()->hasRole('admin')) {
+            // jumlah user
+            $userCount = User::count();
+            // jumlah produk
+            $productCount = Product::count();
+            // jumlah transaksi
+            $transactionCount = Transaction::count();
+            // jumlah blog post
+            $blogPostCount = BlogPost::count();
+
+            // Get user comment and post
+            $userComments = Comment::with('user', 'post')->latest()->take(5)->get();
+            return view('dashboard', compact('userCount', 'productCount', 'transactionCount', 'blogPostCount', 'userComments'));
+        }
+
+        return redirect()->route('transaction.index');
     }
 
     /**
