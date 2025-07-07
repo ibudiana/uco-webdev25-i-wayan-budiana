@@ -11,8 +11,8 @@
             <div class="p-6 text-gray-900">
                 <div class="flex flex-row-reverse text-gray-900 dark:text-gray-50 justify-between items-center mb-6">
                     {{-- <h2 class="text-xl font-semibold">Blog Posts</h2> --}}
-                    <a href="{{ route('subscribers.create') }}" class="inline-flex items-center px-4 py-2 bg-amber-500 text-white rounded hover:bg-amber-600">
-                        <i class="fa-solid fa-plus mr-2"></i> Add New Subscriber
+                    <a href="{{ route('users.create') }}" class="inline-flex items-center px-4 py-2 bg-amber-500 text-white rounded hover:bg-amber-600">
+                        <i class="fa-solid fa-plus mr-2"></i> Add New User
                     </a>
                 </div>
                 <div class="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">

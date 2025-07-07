@@ -25,16 +25,17 @@
                 <i class="fab fa-product-hunt text-md pr-4"></i>
                 {{ __('Products') }}
             </x-nav-link>
-
             <x-nav-link :href="route('blogs.index')" :active="request()->routeIs('blogs.*')">
                 <i class="fas fa-blog text-md pr-4"></i>
                 {{ __('Posts') }}
             </x-nav-link>
-
             <x-nav-link :href="route('subscribers.index')" :active="request()->routeIs('subscribers.*')">
                 <i class="fas fa-newspaper text-md pr-3"></i>
-
                 {{ __('Subscribers') }}
+            </x-nav-link>
+            <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                <i class="fas fa-newspaper text-md pr-3"></i>
+                {{ __('Users') }}
             </x-nav-link>
         @endif
 
