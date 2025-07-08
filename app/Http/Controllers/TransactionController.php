@@ -7,6 +7,7 @@ use App\Models\Transaction;
 use App\Models\TransactionItem;
 use App\Models\ShippingAddress;
 use App\Models\PaymentMethod;
+use App\Models\Cart;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -160,5 +161,27 @@ class TransactionController extends Controller
         }
 
         return view('user.transaction.complete');
+    }
+
+    public function confirm(Request $request)
+    {
+
+        $request->validate([
+            'transaction_id' => 'required|exists:transactions,id',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $transaction = Transaction::findOrFail($request->transaction_id);
+
+        // Simpan bukti pembayaran
+        $imagePath = $request->file('image')->store('upload/payments', 'public');
+        $transaction->update(['payment_proof' => $imagePath, 'status' => 'waiting_for_confirmation']);
+
+        // Kurangi Stock Product
+        foreach ($transaction->items as $item) {
+            $item->product->decrement('stock', $item->quantity);
+        }
+
+        return redirect()->route('transaction.show', $transaction->id)->with('success', 'Bukti pembayaran berhasil diunggah.');
     }
 }

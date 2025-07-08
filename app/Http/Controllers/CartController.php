@@ -40,10 +40,15 @@ class CartController extends Controller
 
     public function fetch()
     {
-        $cart = Cart::with('items.product')
-            ->where('user_id', Auth::id())
-            ->where('is_active', true)
-            ->first();
+        // $cart = Cart::with('items.product')
+        //     ->where('user_id', Auth::id())
+        //     ->where('is_active', true)
+        //     ->first();
+
+        $cart = Cart::with('items', 'items.product')
+            ->whereHas('items', function ($query) {
+                $query->where('user_id', Auth::id());
+            })->first();
 
         if (!$cart) {
             return response()->json([]);
@@ -55,6 +60,7 @@ class CartController extends Controller
                 'name' => $item->product->name,
                 'price' => $item->product->price,
                 'qty' => $item->quantity,
+                'stock' => $item->product->stock,
             ];
         });
 

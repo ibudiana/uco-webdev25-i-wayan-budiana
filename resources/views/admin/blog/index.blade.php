@@ -88,4 +88,6 @@
             </div>
         </div>
     </div>
+
+    <x-alerts.custom />
 @endsection

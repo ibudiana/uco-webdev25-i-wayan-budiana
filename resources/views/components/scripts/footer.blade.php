@@ -96,7 +96,12 @@
             },
 
             increaseQty(index) {
-                this.cart[index].qty++;
+                if(this.cart[index].qty < this.cart[index].stock) {
+                    this.cart[index].qty++;
+                }
+                else {
+                    alert('Jumlah pesanan melebihi stok yang tersedia!');
+                }
                 window.isLoggedIn ? this.saveToServer() : this.save();
             },
 
@@ -104,6 +109,8 @@
                 if (this.cart[index].qty > 1) {
                     this.cart[index].qty--;
                     window.isLoggedIn ? this.saveToServer() : this.save();
+                }else{
+                    this.removeItem(index);
                 }
             },
 

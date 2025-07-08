@@ -6,7 +6,7 @@
 
 @php
     $featuredImage = ($featuredPost && $featuredPost->image)
-        ? asset('storage/upload/products/' . optional($featuredPost->image))
+        ? asset('storage/'. $featuredPost->image)
         : asset('assets/images/no-images.jpeg');
 @endphp
 
@@ -47,7 +47,7 @@
                 @foreach($posts as $post)
                     <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden flex flex-col">
                          @if($post->image)
-                            <img src="{{-- {{ asset('storage/' . $post->image) }} --}}" alt="{{ $post->title }}" class="w-full h-48 object-cover">
+                            <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" class="w-full h-48 object-cover">
                         @endif
                         <div class="p-6 flex flex-col flex-grow">
                             <h2 class="text-xl font-bold mb-2"><a href="{{ route('blogs.show', $post->slug) }}">{{ $post->title }}</a></h2>

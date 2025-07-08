@@ -8,6 +8,11 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
+use App\Models\Subscriber;
+use App\Mail\NewPostNotification;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+
 class BlogPostController extends Controller
 {
     use AuthorizesRequests;
@@ -85,17 +90,29 @@ class BlogPostController extends Controller
         }
 
         $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'title' => 'required|string|max:255',
             'content' => 'required|string',
         ]);
 
+        if ($request->hasFile('image')) {
+            $postData['image'] = $request->file('image')->store('upload/blogs', 'public');
+        }
+
         $post = new BlogPost([
+            'image' => $postData['image'] ?? null,
             'title' => $request->title,
             'content' => $request->content,
             'user_id' => Auth::user()->id,
         ]);
 
         $post->save();
+
+        // Kirim notifikasi email ke subscribers
+        $subscribers = Subscriber::all();
+        foreach ($subscribers as $subscriber) {
+            Mail::to($subscriber->email)->send(new NewPostNotification($post));
+        }
 
         return redirect()->route('blogs.index')->with('success', 'Blog post created successfully.');
     }
@@ -138,13 +155,24 @@ class BlogPostController extends Controller
         }
 
         $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'title' => 'required|string|max:255',
             'content' => 'required|string',
         ]);
 
+        if ($request->hasFile('image')) {
+            // Hapus gambar lama jika ada
+            $blogPost = BlogPost::findOrFail($id);
+            if ($blogPost->image) {
+                Storage::disk('public')->delete($blogPost->image);
+            }
+            $postData['image'] = $request->file('image')->store('upload/blogs', 'public');
+        }
+
         $blogPost = BlogPost::findOrFail($id);
 
         $blogPost->update([
+            'image' => $postData['image'] ?? null,
             'title' => $request->title,
             'slug' => Str::slug($request->title),
             'content' => $request->content,

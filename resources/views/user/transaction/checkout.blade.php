@@ -28,6 +28,9 @@
                                             <span x-text="item.qty"></span>
                                             <button type="button" @click="$store.cart.increaseQty(index)" class="w-5 h-5 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-50 rounded-full">+</button>
                                         </p>
+                                        <p x-show="item.qty == item.stock" style="color: red; font-weight: bold;">
+                                            Warning: this is the maximum quantity available!
+                                        </p>
                                     </div>
                                     <div class="text-right">
                                         <p class="font-semibold" x-text="'Rp ' + Number(item.price).toLocaleString('id-ID')"></p>
@@ -35,6 +38,7 @@
                                     </div>
                                 </div>
                             </template>
+
                         </div>
 
                         <p class="font-semibold text-right text-gray-900 dark:text-white">
@@ -53,7 +57,7 @@
                         </header>
 
                         {{-- Select Shipping Address --}}
-                        <div x-data="{ useNewAddress: false }" class="space-y-4">
+                        <div x-data="{ useNewAddress: @json(!$shippingAddresses || $shippingAddresses->count() == 0) }" class="space-y-4">
                             @if ($shippingAddresses && $shippingAddresses->count() > 0)
                             <div>
                                 <x-input-label for="shipping_address_id" :value="__('Choose Shipping Address')" />
@@ -68,7 +72,9 @@
                                             {{ $shippingAddress->name }} - {{ $shippingAddress->address_line1 }}, {{ $shippingAddress->city }}
                                         </option>
                                     @endforeach
+
                                     <option value="new">{{ __('+ Use a new address') }}</option>
+
                                 </select>
                             </div>
 

@@ -52,16 +52,30 @@
 
         {{-- Tombol --}}
         <td class="px-5 py-4 sm:px-6 text-right">
-            <a href="{{ route('products.edit', $product->slug) }}" class="text-amber-600 hover:text-amber-800">
-                <i class="fa-solid fa-edit text-lg"></i>
-            </a>
-            <form action="{{ route('products.destroy', $product->slug) }}" method="POST" onsubmit="return confirm('Are you sure?')" class="inline">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="text-amber-600 hover:text-amber-800">
-                    <i class="fa-solid fa-trash text-lg"></i>
-                </button>
-            </form>
+            <div class="flex gap-2">
+                Stock:
+                @if($product->stock <= 0)
+                    <span class="text-red-600 font-semibold">Out of Stock</span>
+                @elseif ($product->stock < 10)
+                    <span class="text-red-600 font-semibold">{{ $product->stock }}</span>
+                @elseif ($product->stock >= 10 && $product->stock < 50)
+                    <span class="text-yellow-600 font-semibold">{{ $product->stock }}</span>
+                @else
+                    <span class="text-green-600 font-semibold">{{ $product->stock }}</span>
+                @endif
+
+                <a href="{{ route('products.edit', $product->slug) }}" class="text-amber-600 hover:text-amber-800">
+                    <i class="fa-solid fa-edit text-lg"></i>
+                </a>
+
+                <form action="{{ route('products.destroy', $product->slug) }}" method="POST" onsubmit="return confirm('Are you sure?')" class="inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="text-amber-600 hover:text-amber-800">
+                        <i class="fa-solid fa-trash text-lg"></i>
+                    </button>
+                </form>
+            </div>
         </td>
     </tr>
 </tbody>

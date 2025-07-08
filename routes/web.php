@@ -47,6 +47,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/checkout', [TransactionController::class, 'showCheckoutForm'])->name('checkout');
         Route::post('/checkout', [TransactionController::class, 'processCheckout'])->name('process');
         Route::get('/complete', [TransactionController::class, 'checkoutSuccess'])->name('complete');
+        Route::post('/confirm', [TransactionController::class, 'confirm'])->name('confirm');
 
         Route::get('/', [TransactionController::class, 'index'])->name('index');
         Route::get('/{id}', [TransactionController::class, 'show'])->name('show');

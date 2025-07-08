@@ -18,6 +18,7 @@ class Transaction extends Model
         'description',
         'shipping_address_id',
         'transaction_date',
+        'payment_proof',
     ];
 
     protected $casts = [

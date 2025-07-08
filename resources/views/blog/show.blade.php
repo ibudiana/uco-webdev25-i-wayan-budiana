@@ -6,7 +6,7 @@
 
 @php
     $postImage = $post->image
-        ? asset('storage/upload/products/' . optional($post->image))
+        ? asset('storage/' . $post->image)
         : asset('assets/images/no-images.jpeg');
 @endphp
 

@@ -228,12 +228,17 @@ class ProductController extends Controller
 
         $product = Product::findOrFail($id);
 
+        $stock = $request->stock;
+        if ($request->has('stock') && $request->stock < 0 || $request->stock === '' || $request->stock === null) {
+            $stock = 0;
+        }
+
         $product->update([
             'name' => $request->name,
             'slug' => $request->slug,
             'price' => $request->price,
             'description' => $request->description,
-            'stock' => $request->stock,
+            'stock' => $stock,
             'category_id' => $request->category_id,
             'brand_id' => $request->brand_id,
         ]);

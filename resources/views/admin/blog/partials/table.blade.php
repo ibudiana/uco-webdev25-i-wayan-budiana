@@ -2,7 +2,7 @@
 
 @php
     $image = ($post->image)
-        ? asset('storage/upload/products/' . optional($featuredPost->image))
+        ? asset('storage/' . $post->image)
         : asset('assets/images/no-images.jpeg');
     $title          = $post->title;
     $desc           = Str::limit(strip_tags($post->content), 60);

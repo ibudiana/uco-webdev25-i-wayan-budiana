@@ -96,10 +96,13 @@
         <div class="mt-3">
             <form action="{{ route('subscribers.store') }}" method="POST">
                 @csrf
+                <input type="hidden" name="form_name" value="subscribe_form">
                 <input type="email" name="email" placeholder="Enter email address"
                     class="w-full px-4 py-2 border rounded-md mb-2" />
                 <button class="bg-red-500 text-white px-4 py-2 rounded-md w-full">Subscribe Now</button>
-                <x-alerts.custom />
+                @if (old('form_name') == 'subscribe_form')
+                    <x-alerts.custom />
+                @endif
             </form>
         </div>
       </div>
