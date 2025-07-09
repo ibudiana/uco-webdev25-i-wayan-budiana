@@ -63,20 +63,15 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ##Feature:
 
 -   Tugas ALP
-    25 poin:
 -   OK Manajemen stok (fitur admin)
 -   OK Chat/diskusi
-    20 poin:
 -   OK Review dan rating
-    15 poin:
 -   OK Blog (fitur admin)
 -   OK Share produk ke sosial media
 -   OK Daftar alamat pengiriman
 -   OK Lupa password dan reset password
-    10 poin:
 -   OK Mode tampilan gelap (dark mode)
 -   OK Manajemen pengguna (fitur admin)
 -   OK Edit profil
 -   OK Subscribe newsletter
-    5 poin:
 -   OK Halaman statis yang informatif (contoh: FAQ/tentang/dll)
