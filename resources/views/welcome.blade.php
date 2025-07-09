@@ -5,7 +5,7 @@
 
 {{-- Home Content --}}
 @section('content')
-<div class="mt-10 relative overflow-hidden ">
+<div class="pointer-events-none mt-10 relative overflow-hidden ">
   <div class="pt-16 pb-80 sm:pt-24 sm:pb-40 lg:pt-40 lg:pb-48">
     <div class="relative mx-auto  px-4 sm:static sm:px-6 lg:px-8">
       <div class="sm:max-w-lg">
@@ -143,7 +143,7 @@
         @foreach($posts as $post)
             <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden flex flex-col">
                     @if($post->image)
-                    <img src="{{-- {{ asset('storage/' . $post->image) }} --}}" alt="{{ $post->title }}" class="w-full h-48 object-cover">
+                    <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" class="w-full h-48 object-cover">
                 @endif
                 <div class="p-6 flex flex-col flex-grow">
                     <h2 class="text-xl font-bold mb-2"><a href="{{ route('blogs.show', $post->slug) }}">{{ $post->title }}</a></h2>

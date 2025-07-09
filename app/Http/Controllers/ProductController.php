@@ -9,6 +9,9 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\User;
+use App\Notifications\NewProductNotification;
+use Illuminate\Support\Facades\Notification;
 
 class ProductController extends Controller
 {
@@ -99,7 +102,7 @@ class ProductController extends Controller
         }
 
         // Fetch all products with their related images, variants, attributes, categories, and brand
-        $products = $products->with(['brand', 'category', 'images', 'variants.attributeValues.attribute'])->paginate(10)->withQueryString();
+        $products = $products->with(['brand', 'category', 'images', 'variants.attributeValues.attribute'])->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
 
         // Get Categories and Brands
         $categories = Category::all();
@@ -163,6 +166,10 @@ class ProductController extends Controller
         ]);
 
         $this->handleImageUpload($request, $product);
+
+        // Kirim notifikasi email ke subscribers
+        $users = User::role('user')->get();
+        Notification::send($users, new NewProductNotification($product));
 
         // return redirect()->route('products.index')->with('success', 'Product created successfully.');
         return redirect()

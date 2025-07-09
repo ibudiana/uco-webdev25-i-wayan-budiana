@@ -24,7 +24,7 @@
 
         <!-- Thumbnail gallery -->
         <div class="flex space-x-2 overflow-x-auto">
-            @foreach (optional($product)->images as $thumb)
+            @foreach (optional($product)->images ?? [] as $thumb)
                 <div class="relative">
                     <button
                         type="button"
@@ -196,7 +196,7 @@
 
 <x-modal.add-category/>
 
-@foreach (optional($product)->images as $thumb)
+@foreach (optional($product)->images ?? [] as $thumb)
     <form id="delete-form-{{ $thumb->id }}" action="{{ route('product.image.delete', $thumb->id) }}" method="POST" class="hidden">
         @csrf
         @method('DELETE')

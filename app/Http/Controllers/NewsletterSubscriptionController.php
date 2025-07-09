@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NewsletterSubscriptionController extends Controller
 {
@@ -53,6 +54,10 @@ class NewsletterSubscriptionController extends Controller
         ]);
 
         // Redirect back with success message
+        if (Auth::check() && Auth::user()->hasRole('admin')) {
+            return redirect()->route('subscribers.index')->with('success', 'Subscriber added successfully!');
+        }
+
         return back()->with('success', 'Thank you for subscribing to our newsletter!');
     }
 
@@ -101,7 +106,7 @@ class NewsletterSubscriptionController extends Controller
         ]);
 
         // Redirect back with success message
-        return back()->with('success', 'Update successful!');
+        return redirect()->route('subscribers.index')->with('success', 'Subscriber updated successfully!');
     }
 
     /**

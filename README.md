@@ -60,22 +60,15 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-Feature:
-25 poin:
-Multi bahasa
-Manajemen stok (fitur admin)
+##Feature:
 
+-   Tugas ALP
+    25 poin:
+-   OK Manajemen stok (fitur admin)
 -   OK Chat/diskusi
-    Rekomendasi produk berdasarkan riwayat user
-    Program loyalti
     20 poin:
-    Kupon/promo
 -   OK Review dan rating
-    Landing page management (admin)
     15 poin:
-    Wishlist/Favorite
-    Beli langsung (tanpa masuk ke keranjang belanja)
-    Notifikasi pengingat harga produk
 -   OK Blog (fitur admin)
 -   OK Share produk ke sosial media
 -   OK Daftar alamat pengiriman
@@ -84,7 +77,6 @@ Manajemen stok (fitur admin)
 -   OK Mode tampilan gelap (dark mode)
 -   OK Manajemen pengguna (fitur admin)
 -   OK Edit profil
-    Diskon produk (fitur admin)
 -   OK Subscribe newsletter
     5 poin:
 -   OK Halaman statis yang informatif (contoh: FAQ/tentang/dll)
